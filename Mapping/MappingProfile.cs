@@ -8,8 +8,10 @@ namespace vega.Mapping
     {
         public MappingProfile()
         {
+            //mapping domain to resources
             CreateMap<Make,MakeResource>();
             CreateMap<Model,ModelResource>();
+            CreateMap<Feature,FeatureResource>();
         }
     }
 }
