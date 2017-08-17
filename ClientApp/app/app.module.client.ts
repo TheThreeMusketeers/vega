@@ -1,3 +1,5 @@
+import { MakeService } from './services/make.service';
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
@@ -14,6 +16,7 @@ import { sharedConfig } from './app.module.shared';
         ...sharedConfig.imports
     ],
     providers: [
+        MakeService,
         { provide: 'ORIGIN_URL', useValue: location.origin }
     ]
 })
