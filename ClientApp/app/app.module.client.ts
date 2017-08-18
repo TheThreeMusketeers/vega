@@ -1,4 +1,5 @@
-import { MakeService } from './services/make.service';
+
+import { VehicleService } from './services/vehicle.service';
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -16,7 +17,7 @@ import { sharedConfig } from './app.module.shared';
         ...sharedConfig.imports
     ],
     providers: [
-        MakeService,
+        VehicleService,
         { provide: 'ORIGIN_URL', useValue: location.origin }
     ]
 })

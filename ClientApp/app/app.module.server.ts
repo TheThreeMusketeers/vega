@@ -1,4 +1,5 @@
-import { MakeService } from './services/make.service';
+
+import { VehicleService } from './services/vehicle.service';
 import { NgModule } from '@angular/core';
 import { ServerModule } from '@angular/platform-server';
 import { sharedConfig } from './app.module.shared';
@@ -11,7 +12,7 @@ import { sharedConfig } from './app.module.shared';
         ...sharedConfig.imports
     ],
     providers:[
-        MakeService
+        VehicleService
     ]
    
 })
