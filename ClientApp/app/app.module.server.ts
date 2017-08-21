@@ -1,3 +1,4 @@
+import { ToastyModule } from 'ng2-toasty';
 
 import { VehicleService } from './services/vehicle.service';
 import { NgModule } from '@angular/core';
@@ -9,6 +10,7 @@ import { sharedConfig } from './app.module.shared';
     declarations: sharedConfig.declarations,
     imports: [
         ServerModule,
+        ToastyModule.forRoot(),
         ...sharedConfig.imports
     ],
     providers:[

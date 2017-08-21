@@ -1,3 +1,4 @@
+import { ToastyModule } from 'ng2-toasty';
 
 import { VehicleService } from './services/vehicle.service';
 
@@ -14,6 +15,7 @@ import { sharedConfig } from './app.module.shared';
         BrowserModule,
         FormsModule,
         HttpModule,
+        ToastyModule.forRoot(),
         ...sharedConfig.imports
     ],
     providers: [

@@ -23,4 +23,9 @@ export class VehicleService {
       
   }//getFeatures
 
+  create(vehicle){
+      return this.http.post(this.originUrl +'/api/vehicles',vehicle)
+        .map(res=>res.json());
+  }//create
+
 }
