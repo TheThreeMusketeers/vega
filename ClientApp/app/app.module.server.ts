@@ -1,3 +1,5 @@
+import { AppErrorHandler } from './components/app/app.error-handler';
+import { ErrorHandler } from '@angular/core';
 import { ToastyModule } from 'ng2-toasty';
 
 import { VehicleService } from './services/vehicle.service';
@@ -14,6 +16,7 @@ import { sharedConfig } from './app.module.shared';
         ...sharedConfig.imports
     ],
     providers:[
+        {provide:ErrorHandler,useClass:AppErrorHandler},
         VehicleService
     ]
    

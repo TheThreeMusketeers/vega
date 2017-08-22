@@ -1,3 +1,4 @@
+import { ErrorHandler } from '@angular/core';
 import { ToastyModule } from 'ng2-toasty';
 
 import { VehicleService } from './services/vehicle.service';
@@ -7,6 +8,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { sharedConfig } from './app.module.shared';
+import { AppErrorHandler } from "./components/app/app.error-handler";
 
 @NgModule({
     bootstrap: sharedConfig.bootstrap,
@@ -20,6 +22,7 @@ import { sharedConfig } from './app.module.shared';
     ],
     providers: [
         VehicleService,
+        {provide:ErrorHandler,useClass:AppErrorHandler},
         { provide: 'ORIGIN_URL', useValue: location.origin }
     ]
 })

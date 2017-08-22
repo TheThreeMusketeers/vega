@@ -1,3 +1,5 @@
+import { AppErrorHandler } from './components/app/app.error-handler';
+import { ErrorHandler } from '@angular/core';
 
 import {FormsModule} from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -36,6 +38,7 @@ export const sharedConfig: NgModule = {
         ])
     ],
     providers:[
-        VehicleService
+        VehicleService,
+        {provide:ErrorHandler,useClass:AppErrorHandler}
     ]
 };
