@@ -1,13 +1,10 @@
 import { AppErrorHandler } from './components/app/app.error-handler';
 import { ErrorHandler } from '@angular/core';
-
 import {FormsModule} from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import {ToastyModule} from 'ng2-toasty';
-
 import { VehicleService } from './services/vehicle.service';
-
 import { AppComponent } from './components/app/app.component'
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
@@ -31,6 +28,7 @@ export const sharedConfig: NgModule = {
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'vehicles/new', component:VehicleFormComponent},
+            { path: 'vehicles/:id', component:VehicleFormComponent},
             { path: 'home', component: HomeComponent },
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
