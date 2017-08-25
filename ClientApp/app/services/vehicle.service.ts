@@ -38,7 +38,13 @@ export class VehicleService {
     return this.http.get(this.originUrl +'/api/vehicles/' + id)
       .map(res=>res.json());
       
-  }//getFeatures
+  }//getVehicle
+
+  getVehicles(){
+    return this.http.get(this.originUrl +'/api/vehicles')
+      .map(res=>res.json());
+      
+  }//getVehicles
 
   delete(id){
     return this.http.delete(this.originUrl +'/api/vehicles/' + id)

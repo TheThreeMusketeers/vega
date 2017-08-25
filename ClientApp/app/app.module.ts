@@ -1,4 +1,3 @@
-
 import { AppErrorHandler } from './components/app/app.error-handler';
 import { ErrorHandler } from '@angular/core';
 import {FormsModule} from '@angular/forms';
@@ -12,7 +11,6 @@ import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { VehicleFormComponent } from './components/vehicle-form/vehicle-form.component';
-import { VehicleListComponent } from './components/vehicle-list/vehicle-list.component';
 
 export const sharedConfig: NgModule = {
     bootstrap: [ AppComponent ],
@@ -22,17 +20,15 @@ export const sharedConfig: NgModule = {
         CounterComponent,
         FetchDataComponent,
         HomeComponent,
-        VehicleFormComponent,
-        VehicleListComponent
+        VehicleFormComponent
     ],
     imports: [
         FormsModule,
         ToastyModule.forRoot(),
         RouterModule.forRoot([
-            { path: '', redirectTo: 'vehicles', pathMatch: 'full' },
+            { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'vehicles/new', component:VehicleFormComponent},
             { path: 'vehicles/:id', component:VehicleFormComponent},
-            { path: 'vehicles', component:VehicleListComponent},
             { path: 'home', component: HomeComponent },
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
