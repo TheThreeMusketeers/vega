@@ -19,12 +19,21 @@ export class VehicleListComponent implements OnInit {
     this.vehicleService.getMakes()
       .subscribe(makes=>this.makes=makes);
 
-    this.vehicleService.getVehicles()
-      .subscribe(vehicles=>this.vehicles=vehicles);
+    this.populateVehicles();
   }
 
+  private populateVehicles(){
+    this.vehicleService.getVehicles(this.filter)
+    .subscribe(vehicles=>this.vehicles=vehicles);
+  }//populateVehicles
+
   onFilterChange(){
-    console.log("Filter->makeId",this.filter.makeId);
+    this.populateVehicles();
+  }//onFilterChange
+
+  resetFilter(){
+    this.filter = {};
+    this.onFilterChange();
   }
 
 }
