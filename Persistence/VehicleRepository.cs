@@ -5,6 +5,7 @@ using vega.Core.Models;
 using vega.Core;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace vega.Persistence
 {
@@ -43,18 +44,27 @@ namespace vega.Persistence
             if(queryObj.MakeId.HasValue)
                 query = query.Where(v=>v.Model.MakeId == queryObj.MakeId.Value);
 
-            if(queryObj.SortBy == "make")
-                query = (queryObj.IsSortAscending)?query.OrderBy(v=>v.Model.Make.Name):query.OrderByDescending(v=>v.Model.Make.Name);
-            if(queryObj.SortBy == "model")
-                query = (queryObj.IsSortAscending)?query.OrderBy(v=>v.Model.Name):query.OrderByDescending(v=>v.Model.Name);
-            if(queryObj.SortBy == "contactName")
-                query = (queryObj.IsSortAscending)?query.OrderBy(v=>v.ContactName):query.OrderByDescending(v=>v.ContactName);
-            if(queryObj.SortBy == "id")
-                query = (queryObj.IsSortAscending)?query.OrderBy(v=>v.Id):query.OrderByDescending(v=>v.Id);
+            var columnsMap = new Dictionary<string,Expression<Func<Vehicle,object>>>()
+            {
+                ["make"] = v=>v.Model.Make.Name,
+                ["model"] = v=>v.Model.Name,
+                ["contactName"] = v=>v.ContactName,
+                ["id"] = v=>v.Id
+            };
+        
+            query = ApplyOrdering(queryObj,query,columnsMap);
 
             return await query.ToListAsync();
                 
         }//GetVehicles
+
+        private IQueryable<Vehicle> ApplyOrdering(VehicleQuery queryObj,IQueryable<Vehicle> query,Dictionary<string,Expression<Func<Vehicle,object>>> columnsMap)
+        {
+            if(queryObj.IsSortAscending)
+                return query.OrderBy(columnsMap[queryObj.SortBy]);
+            else 
+                return query.OrderByDescending(columnsMap[queryObj.SortBy]);
+        }
 
 
         public void Add(Vehicle vehicle)
