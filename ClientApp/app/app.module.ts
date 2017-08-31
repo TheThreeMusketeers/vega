@@ -1,3 +1,4 @@
+import { PaginationComponent } from './components/shared/pagination.component';
 import { AppErrorHandler } from './components/app/app.error-handler';
 import { ErrorHandler } from '@angular/core';
 import {FormsModule} from '@angular/forms';
@@ -20,7 +21,8 @@ export const sharedConfig: NgModule = {
         CounterComponent,
         FetchDataComponent,
         HomeComponent,
-        VehicleFormComponent
+        VehicleFormComponent,
+        PaginationComponent
     ],
     imports: [
         FormsModule,

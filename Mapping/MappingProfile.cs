@@ -11,6 +11,7 @@ namespace vega.Mapping
         public MappingProfile()
         {
             //mapping domain to API resources
+            CreateMap(typeof(QueryResult<>),typeof(QueryResultResource<>));
             CreateMap<Make,MakeResource>();
             CreateMap<Make,KeyValuePairResource>();
             CreateMap<Model,KeyValuePairResource>();
