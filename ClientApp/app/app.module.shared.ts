@@ -1,3 +1,4 @@
+import { ViewVehicleComponent } from './components/view-vehicle/view-vehicle';
 import { PaginationComponent } from './components/shared/pagination.component';
 
 import { AppErrorHandler } from './components/app/app.error-handler';
@@ -25,7 +26,8 @@ export const sharedConfig: NgModule = {
         HomeComponent,
         VehicleFormComponent,
         VehicleListComponent,
-        PaginationComponent
+        PaginationComponent,
+        ViewVehicleComponent
     ],
     imports: [
         FormsModule,
@@ -33,7 +35,8 @@ export const sharedConfig: NgModule = {
         RouterModule.forRoot([
             { path: '', redirectTo: 'vehicles', pathMatch: 'full' },
             { path: 'vehicles/new', component:VehicleFormComponent},
-            { path: 'vehicles/:id', component:VehicleFormComponent},
+            { path: 'vehicles/edit/:id',component:VehicleFormComponent},
+            { path: 'vehicles/:id', component:ViewVehicleComponent},
             { path: 'vehicles', component:VehicleListComponent},
             { path: 'home', component: HomeComponent },
             { path: 'counter', component: CounterComponent },

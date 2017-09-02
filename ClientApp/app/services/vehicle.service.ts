@@ -25,11 +25,13 @@ export class VehicleService {
   }//getFeatures
 
   create(vehicle:SaveVehicle){
+    /*
     if(isNaN(vehicle.id))
       {
         vehicle.id=0;
       }
-      console.log("vehicle.id",vehicle.id);
+      */
+      //console.log("vehicle.id",vehicle.id);
       return this.http.post(this.originUrl +'/api/vehicles',vehicle)
         .map(res=>res.json());
   }//create
