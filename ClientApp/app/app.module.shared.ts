@@ -1,3 +1,4 @@
+
 import { ViewVehicleComponent } from './components/view-vehicle/view-vehicle';
 import { PaginationComponent } from './components/shared/pagination.component';
 
@@ -8,6 +9,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import {ToastyModule} from 'ng2-toasty';
 import { VehicleService } from './services/vehicle.service';
+import { PhotoService } from './services/photo.service';
 import { AppComponent } from './components/app/app.component'
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
@@ -46,6 +48,7 @@ export const sharedConfig: NgModule = {
     ],
     providers:[
         VehicleService,
+        PhotoService,
         {provide:ErrorHandler,useClass:AppErrorHandler}
     ]
 };

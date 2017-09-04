@@ -1,3 +1,4 @@
+import { PhotoService } from './services/photo.service';
 import { AppErrorHandler } from './components/app/app.error-handler';
 import { ErrorHandler } from '@angular/core';
 import { ToastyModule } from 'ng2-toasty';
@@ -17,7 +18,8 @@ import { sharedConfig } from './app.module.shared';
     ],
     providers:[
         {provide:ErrorHandler,useClass:AppErrorHandler},
-        VehicleService
+        VehicleService,
+        PhotoService
     ]
    
 })
