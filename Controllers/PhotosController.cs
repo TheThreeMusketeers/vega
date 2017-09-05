@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.Options;
 using vega.Controllers.Resources;
 using vega.Core;
 using vega.Core.Models;
+using vega.Persistence;
 
 namespace vega.Controllers
 {
@@ -20,6 +22,7 @@ namespace vega.Controllers
         private readonly IVehicleRepository repository;
         private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
+        private readonly IPhotoRepository photoRepository;
         private readonly PhotoSettings photoSettings;
     
         public PhotosController(
@@ -27,15 +30,25 @@ namespace vega.Controllers
             IVehicleRepository repository,
             IUnitOfWork unitOfWork,
             IMapper mapper,
-            IOptionsSnapshot<PhotoSettings> options)
+            IOptionsSnapshot<PhotoSettings> options,
+            IPhotoRepository photoRepository)
         {
             this.repository = repository;
             this.unitOfWork = unitOfWork;
             this.mapper = mapper;
+            this.photoRepository = photoRepository;
             this.host = host;
             this.photoSettings = options.Value;
 
         }
+
+        [HttpGet]
+        public async Task<IEnumerable<PhotoResource>> GetPhotos(int vehicleId)
+        {
+            var photos = await photoRepository.GetPhotos(vehicleId);
+            return mapper.Map<IEnumerable<Photo>,IEnumerable<PhotoResource>>(photos);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Upload(int vehicleId, IFormFile file)
         {
