@@ -1,3 +1,5 @@
+import { BrowserXhrWithProgress, ProgressService } from './services/progress.service';
+import { BrowserXhr } from '@angular/http';
 
 import { ViewVehicleComponent } from './components/view-vehicle/view-vehicle';
 import { PaginationComponent } from './components/shared/pagination.component';
@@ -49,6 +51,8 @@ export const sharedConfig: NgModule = {
     providers:[
         VehicleService,
         PhotoService,
-        {provide:ErrorHandler,useClass:AppErrorHandler}
+        ProgressService,
+        {provide:ErrorHandler,useClass:AppErrorHandler},
+        {provide:BrowserXhr,useClass:BrowserXhrWithProgress}
     ]
 };

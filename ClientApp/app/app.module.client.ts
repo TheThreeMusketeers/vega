@@ -1,5 +1,7 @@
 import { ErrorHandler } from '@angular/core';
 import { ToastyModule } from 'ng2-toasty';
+import { BrowserXhrWithProgress, ProgressService } from './services/progress.service';
+import { BrowserXhr } from '@angular/http';
 
 import { VehicleService } from './services/vehicle.service';
 import { PhotoService } from "./services/photo.service";
@@ -25,7 +27,9 @@ import { AppErrorHandler } from "./components/app/app.error-handler";
     providers: [
         VehicleService,
         PhotoService,
+        ProgressService,
         {provide:ErrorHandler,useClass:AppErrorHandler},
+        {provide:BrowserXhr,useClass:BrowserXhrWithProgress},
         { provide: 'ORIGIN_URL', useValue: location.origin }
     ]
 })
