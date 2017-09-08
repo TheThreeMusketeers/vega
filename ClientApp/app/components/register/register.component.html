@@ -1,0 +1,47 @@
+<h1>Register</h1>
+<p>
+    {{user | json}}
+</p>
+<form #form="ngForm" (ngSubmit)="submit()" novalidate>
+        <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input id="firstName" type="text" class="form-control"
+                      [(ngModel)]="user.firstName" name="firstName"
+                      required
+                      #firstName="ngModel">
+                      <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">Please specify the first name</div>
+        </div>
+        <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input id="lastName" type="text" class="form-control"
+                      [(ngModel)]="user.lastName" name="lastName"
+                      required
+                      #lastName="ngModel">
+                      <div class="alert alert-danger" *ngIf="lastName.touched && !lastName.valid">Please specify the last name</div>
+        </div>
+        <div class="form-group">
+                <label for="email">Email</label>
+                <input id="email" type="email" class="form-control"
+                      [(ngModel)]="user.email" name="email"
+                      required
+                      #email="ngModel">
+                      <div class="alert alert-danger" *ngIf="email.touched && !email.valid">Please specify the email</div>
+        </div>
+        <div class="form-group">
+                <label for="password">Password</label>
+                <input id="password" type="password" class="form-control"
+                      [(ngModel)]="user.password" name="password"
+                      required
+                      #password="ngModel">
+                      <div class="alert alert-danger" *ngIf="password.touched && !password.valid">Please specify the password</div>
+        </div>
+        <div class="form-group">
+                <label for="confirmPassord">Confirm Password</label>
+                <input id="confirmPassord" type="password" class="form-control"
+                      [(ngModel)]="user.confirmPassord" name="confirmPassord"
+                      required
+                      #confirmPassord="ngModel">
+                      <div class="alert alert-danger" *ngIf="confirmPassord.touched && !confirmPassord.valid">Please specify the password again</div>
+        </div>
+<button class="btn btn-primary" [disabled]="!form.valid">Register</button>
+</form>

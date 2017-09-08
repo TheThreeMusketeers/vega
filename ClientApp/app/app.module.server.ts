@@ -1,3 +1,4 @@
+import { AuthService } from './services/auth.service';
 import { PhotoService } from './services/photo.service';
 import { AppErrorHandler } from './components/app/app.error-handler';
 import { ErrorHandler } from '@angular/core';
@@ -23,7 +24,8 @@ import { sharedConfig } from './app.module.shared';
         {provide:BrowserXhr,useClass:BrowserXhrWithProgress},
         VehicleService,
         PhotoService,
-        ProgressService
+        ProgressService,
+        AuthService
     ]
    
 })
