@@ -20,23 +20,23 @@ namespace vega.Controllers
     {
         private readonly IHostingEnvironment host;
         private readonly IVehicleRepository repository;
-        private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
         private readonly IPhotoRepository photoRepository;
+        private readonly IPhotoService photoService;
         private readonly PhotoSettings photoSettings;
     
         public PhotosController(
             IHostingEnvironment host, 
             IVehicleRepository repository,
-            IUnitOfWork unitOfWork,
             IMapper mapper,
             IOptionsSnapshot<PhotoSettings> options,
-            IPhotoRepository photoRepository)
+            IPhotoRepository photoRepository,
+            IPhotoService photoService)
         {
             this.repository = repository;
-            this.unitOfWork = unitOfWork;
             this.mapper = mapper;
             this.photoRepository = photoRepository;
+            this.photoService = photoService;
             this.host = host;
             this.photoSettings = options.Value;
 
@@ -62,22 +62,7 @@ namespace vega.Controllers
             if(!photoSettings.IsSupported(file.FileName)) return BadRequest("Invalid file type");
 
             var uploadsFolderPath = Path.Combine(host.WebRootPath, "uploads");
-            if (!Directory.Exists(uploadsFolderPath))
-                Directory.CreateDirectory(uploadsFolderPath);
-
-            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-            var filePath = Path.Combine(uploadsFolderPath, fileName);
-
-            using (var stream = new FileStream(filePath, FileMode.Create))
-            {
-                await file.CopyToAsync(stream);
-            }
-
-            var photo = new Photo {FileName = fileName};
-            vehicle.Photos.Add(photo);
-
-            await unitOfWork.CompleteAsync();
-
+            var photo = await photoService.UploadPhoto(vehicle,file,uploadsFolderPath);
             return Ok(mapper.Map<Photo,PhotoResource>(photo));
         }
     }//cs
