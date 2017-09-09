@@ -38,6 +38,11 @@
                     </a>
                 </li>
                 <li [routerLinkActive]="['link-active']" *ngIf="!auth.isAuthenticated">
+                        <a [routerLink]="['/login']">
+                            <span class='glyphicon glyphicon-log-in'></span> Login
+                        </a>
+                </li>
+                <li [routerLinkActive]="['link-active']" *ngIf="!auth.isAuthenticated">
                         <a [routerLink]="['/register']">
                             <span class='glyphicon glyphicon-plus'></span> Register
                         </a>

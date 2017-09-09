@@ -7,5 +7,7 @@ namespace vega.Core
     public interface IUserRepository
     {
           void Add(User user);
+
+          Task<User> Login(LoginViewModel loginData);
     }
 }

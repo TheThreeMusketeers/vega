@@ -1,3 +1,6 @@
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using vega.Core;
 using vega.Core.Models;
 
@@ -14,6 +17,11 @@ namespace vega.Persistence
         public void Add(User user)
         {
             context.Users.Add(user);
+        }
+
+        public async Task<User> Login(LoginViewModel loginData)
+        {
+            return await context.Users.SingleOrDefaultAsync(u => u.Email == loginData.Email && u.Password == loginData.Password);
         }
     }
 }

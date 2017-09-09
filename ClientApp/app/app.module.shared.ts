@@ -1,3 +1,4 @@
+import { LoginComponent } from './components/login/login.component';
 import { AuthService } from './services/auth.service';
 import { RegisterComponent } from './components/register/register.component';
 import { BrowserXhrWithProgress, ProgressService } from './services/progress.service';
@@ -35,7 +36,8 @@ export const sharedConfig: NgModule = {
         VehicleListComponent,
         PaginationComponent,
         ViewVehicleComponent,
-        RegisterComponent
+        RegisterComponent,
+        LoginComponent
     ],
     imports: [
         FormsModule,
@@ -48,6 +50,7 @@ export const sharedConfig: NgModule = {
             { path: 'vehicles/:id', component:ViewVehicleComponent},
             { path: 'vehicles', component:VehicleListComponent},
             { path: 'register', component:RegisterComponent},
+            { path: 'login', component:LoginComponent},
             { path: 'home', component: HomeComponent },
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },

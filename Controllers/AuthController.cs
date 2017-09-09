@@ -25,20 +25,45 @@ namespace vega.Controllers
 
         }
         [HttpPost("register")]
-        public async Task<JwtPacket> Register([FromBody] User user)
+        public async Task<IActionResult> Register([FromBody] User user)
         {
-            var jwt = new JwtSecurityToken();
-            var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
             repository.Add(user);
 
             await unitOfWork.CompleteAsync();
 
+            var jwtPacket = CreateJwtPacket(user);
+
+            return Ok(jwtPacket);
+
+            
+        }//Register
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginViewModel loginData)
+        {
+            var user = await repository.Login(loginData);
+            
+            if(user==null) return NotFound("Email or password is incorrect!");
+
+            var jwtPacket = CreateJwtPacket(user);
+
+            return Ok(jwtPacket);
+
+        }//Login
+
+        JwtPacket CreateJwtPacket(User user)
+        {
+            var jwt = new JwtSecurityToken();
+            var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
             return new JwtPacket()
             {
                 Token = encodedJwt,
                 FirstName = user.FirstName
             };
-        }
+        }//CreateJwtPacket
+
     }//cs
 }//ns

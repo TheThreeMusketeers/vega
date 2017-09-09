@@ -28,18 +28,29 @@ export class AuthService {
          delete user.confirmPassword;
          return this.http.post(this.originUrl+'/auth/register',user)
             .subscribe(res => {
-                var authResponse = res.json();
-                if(!authResponse.token)
-                    return;
-                localStorage.setItem(this.TOKEN_KEY,authResponse.token);
-                localStorage.setItem(this.NAME_KEY,authResponse.firstName);
-                this.router.navigate(['/']);
+                this.authenticate(res);
             });
+     }
+
+     login(loginData){
+        return this.http.post(this.originUrl+'/auth/login',loginData)
+        .subscribe(res => {
+            this.authenticate(res);
+        });
      }
 
      logout(){
          localStorage.removeItem(this.NAME_KEY);
          localStorage.removeItem(this.TOKEN_KEY);
+     }
+
+     authenticate(res){
+        var authResponse = res.json();
+        if(!authResponse.token)
+            return;
+        localStorage.setItem(this.TOKEN_KEY,authResponse.token);
+        localStorage.setItem(this.NAME_KEY,authResponse.firstName);
+        this.router.navigate(['/']);
      }
     
 }//cs

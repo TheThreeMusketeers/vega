@@ -1,0 +1,26 @@
+<h1>Login</h1>
+<p>
+    {{loginData | json}}
+</p>
+
+<form #form="ngForm" (ngSubmit)="submit()" novalidate>
+        
+        <div class="form-group">
+                <label for="email">Email</label>
+                <input id="email" type="email" class="form-control"
+                      [(ngModel)]="loginData.email" name="email"
+                      required
+                      #email="ngModel">
+                      <div class="alert alert-danger" *ngIf="email.touched && !email.valid">Please specify the email</div>
+        </div>
+        <div class="form-group">
+                <label for="password">Password</label>
+                <input id="password" type="password" class="form-control"
+                      [(ngModel)]="loginData.password" name="password"
+                      required
+                      #password="ngModel">
+                      <div class="alert alert-danger" *ngIf="password.touched && !password.valid">Please specify the password</div>
+        </div>
+        
+<button class="btn btn-success" [disabled]="!form.valid">Login</button>
+</form>
