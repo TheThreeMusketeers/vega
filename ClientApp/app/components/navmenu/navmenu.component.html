@@ -37,11 +37,21 @@
                         <span class='glyphicon glyphicon-th-list'></span> Fetch data
                     </a>
                 </li>
-                <li [routerLinkActive]="['link-active']">
+                <li [routerLinkActive]="['link-active']" *ngIf="!auth.isAuthenticated">
                         <a [routerLink]="['/register']">
                             <span class='glyphicon glyphicon-plus'></span> Register
                         </a>
-                    </li>
+                </li>
+                <li *ngIf="auth.isAuthenticated">
+                        <a [routerLink]="['/']">
+                            <span class='glyphicon glyphicon-user'></span> Welcome {{auth.name}}
+                        </a>
+                </li>
+                <li [routerLinkActive]="['link-active']"  >
+                        <a (click)="auth.logout()" *ngIf="auth.isAuthenticated">
+                            <span class='glyphicon glyphicon-log-out'></span> Logout
+                        </a>
+                </li>
             </ul>
         </div>
     </div>

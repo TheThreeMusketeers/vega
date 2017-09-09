@@ -26,6 +26,7 @@ module.exports = (env) => {
                 '@angular/platform-browser-dynamic',
                 '@angular/router',
                 'angular2-chartjs',
+                'angular2-jwt',
                 'bootstrap',
                 'bootstrap/dist/css/bootstrap.css',
                 'chart.js',

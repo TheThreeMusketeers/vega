@@ -36,12 +36,12 @@
                       <div class="alert alert-danger" *ngIf="password.touched && !password.valid">Please specify the password</div>
         </div>
         <div class="form-group">
-                <label for="confirmPassord">Confirm Password</label>
-                <input id="confirmPassord" type="password" class="form-control"
-                      [(ngModel)]="user.confirmPassord" name="confirmPassord"
+                <label for="confirmPassword">Confirm Password</label>
+                <input id="confirmPassword" type="password" class="form-control"
+                      [(ngModel)]="user.confirmPassword" name="confirmPassword"
                       required
-                      #confirmPassord="ngModel">
-                      <div class="alert alert-danger" *ngIf="confirmPassord.touched && !confirmPassord.valid">Please specify the password again</div>
+                      #confirmPassword="ngModel">
+                      <div class="alert alert-danger" *ngIf="confirmPassword.touched && !confirmPassword.valid">Please specify the password again</div>
         </div>
 <button class="btn btn-primary" [disabled]="!form.valid">Register</button>
 </form>

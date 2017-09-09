@@ -7,29 +7,37 @@ using vega.Controllers.Resources;
 using vega.Core.Models;
 using vega.Persistence;
 using System.IdentityModel.Tokens.Jwt;
+using vega.Core;
 
 namespace vega.Controllers
 {
     [Route("/auth")]
     public class AuthController : Controller
     {
-        private readonly VegaDbContext context;
         private readonly IMapper mapper;
-        public AuthController(VegaDbContext context, IMapper mapper)
+        private readonly IUserRepository repository;
+        private readonly IUnitOfWork unitOfWork;
+        public AuthController(IMapper mapper, IUserRepository repository, IUnitOfWork unitOfWork)
         {
+            this.unitOfWork = unitOfWork;
+            this.repository = repository;
             this.mapper = mapper;
-            this.context = context;
 
         }
         [HttpPost("register")]
-        public async Task<JwtPacket> Register()
+        public async Task<JwtPacket> Register([FromBody] User user)
         {
             var jwt = new JwtSecurityToken();
             var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 
+            repository.Add(user);
+
+            await unitOfWork.CompleteAsync();
+
             return new JwtPacket()
             {
-                Token = encodedJwt
+                Token = encodedJwt,
+                FirstName = user.FirstName
             };
         }
     }//cs
