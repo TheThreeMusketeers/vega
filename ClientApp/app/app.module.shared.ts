@@ -2,6 +2,7 @@ import { AuthService } from './services/auth.service';
 import { RegisterComponent } from './components/register/register.component';
 import { BrowserXhrWithProgress, ProgressService } from './services/progress.service';
 import { BrowserXhr } from '@angular/http';
+import { ChartModule } from 'angular2-chartjs';
 
 import { ViewVehicleComponent } from './components/view-vehicle/view-vehicle';
 import { PaginationComponent } from './components/shared/pagination.component';
@@ -38,6 +39,7 @@ export const sharedConfig: NgModule = {
     ],
     imports: [
         FormsModule,
+        ChartModule,
         ToastyModule.forRoot(),
         RouterModule.forRoot([
             { path: '', redirectTo: 'vehicles', pathMatch: 'full' },
