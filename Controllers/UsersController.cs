@@ -42,13 +42,35 @@ namespace vega.Controllers
         [HttpGet("me")]
         public async Task<IActionResult> GetUser()
         {
-            var id = HttpContext.User.Claims.First().Value;
-            
-            var user = await repository.GetUser(Convert.ToInt32(id));
+            var user = await GetSecureUser();
             
             if(user==null) return NotFound("User not found!");
 
             return Ok(user);
+        }
+
+        [Authorize]
+        [HttpPost("me")]
+        public async Task<IActionResult> UpdateUser([FromBody] UpdateUserResource userResource)
+        {
+            var user = await GetSecureUser();
+
+            if(user==null) return NotFound("User not found!");
+
+            mapper.Map<UpdateUserResource, User>(userResource, user);
+            
+            await unitOfWork.CompleteAsync();
+
+            return Ok(user);
+        }
+
+        private async Task<User> GetSecureUser()
+        {
+            var id = HttpContext.User.Claims.First().Value;
+            
+            var user = await repository.GetUser(Convert.ToInt32(id));
+
+            return user;
         }
 
 

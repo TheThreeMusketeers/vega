@@ -11,5 +11,6 @@ namespace vega.Core
           Task<User> Login(LoginViewModel loginData);
 
           Task<User> GetUser(int id);
+
     }
 }

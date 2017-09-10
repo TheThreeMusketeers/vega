@@ -1,0 +1,26 @@
+<h1>User Profile</h1>
+<p>
+    {{updateUserResource | json}}
+</p>
+
+<form #form="ngForm" (ngSubmit)="submit()" novalidate>
+        
+        <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input id="firstName" type="text" class="form-control"
+                      [(ngModel)]="updateUserResource.firstName" name="firstName"
+                      required
+                      #firstName="ngModel">
+                      <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">Please specify the first name</div>
+        </div>
+        <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input id="lastName" type="text" class="form-control"
+                  [(ngModel)]="updateUserResource.lastName" name="lastName"
+                  required
+                  #lastName="ngModel">
+                  <div class="alert alert-danger" *ngIf="lastName.touched && !lastName.valid">Please specify the last name</div>
+    </div>
+        
+<button class="btn btn-success" [disabled]="!form.valid">Save</button>
+</form>

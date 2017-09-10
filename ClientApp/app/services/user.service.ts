@@ -19,4 +19,9 @@ export class UserService {
             .map(user => user.json());
      }
 
+     updateUser(user){
+        return this.http.post(this.originUrl+'/api/users/me',user,this.auth.tokenHeader)
+           .map(user => user.json());
+    }
+
 }//cs

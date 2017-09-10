@@ -26,6 +26,8 @@ namespace vega.Mapping
                 .ForMember(vr=>vr.Features,opt=>opt.MapFrom(v=>v.Features.Select(vf=>new KeyValuePairResource{Id=vf.Feature.Id,Name=vf.Feature.Name})));
             
             //mapping API resources to domain
+            CreateMap<UpdateUserResource,User>()
+                .ForMember(u=>u.Id,opt=>opt.Ignore());
             CreateMap<VehicleQueryResource,VehicleQuery>();
             CreateMap<SaveVehicleResource,Vehicle>()
                 .ForMember(v=>v.Id,opt=>opt.Ignore())

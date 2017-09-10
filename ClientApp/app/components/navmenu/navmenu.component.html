@@ -27,16 +27,7 @@
                         <span class='glyphicon glyphicon-home'></span> Vehicles
                     </a>
                 </li>
-                <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/counter']">
-                        <span class='glyphicon glyphicon-education'></span> Counter
-                    </a>
-                </li>
-                <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/fetch-data']">
-                        <span class='glyphicon glyphicon-th-list'></span> Fetch data
-                    </a>
-                </li>
+                
                 <li [routerLinkActive]="['link-active']" *ngIf="!auth.isAuthenticated">
                         <a [routerLink]="['/login']">
                             <span class='glyphicon glyphicon-log-in'></span> Login
@@ -48,7 +39,7 @@
                         </a>
                 </li>
                 <li *ngIf="auth.isAuthenticated">
-                        <a [routerLink]="['/']">
+                        <a [routerLink]="['/user']">
                             <span class='glyphicon glyphicon-user'></span> Welcome {{auth.name}}
                         </a>
                 </li>

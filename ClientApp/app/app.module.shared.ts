@@ -1,3 +1,4 @@
+import { UserComponent } from './components/user/user.component';
 import { UserService } from './services/user.service';
 import { LoginComponent } from './components/login/login.component';
 import { AuthService } from './services/auth.service';
@@ -38,7 +39,8 @@ export const sharedConfig: NgModule = {
         PaginationComponent,
         ViewVehicleComponent,
         RegisterComponent,
-        LoginComponent
+        LoginComponent,
+        UserComponent
     ],
     imports: [
         FormsModule,
@@ -52,6 +54,7 @@ export const sharedConfig: NgModule = {
             { path: 'vehicles', component:VehicleListComponent},
             { path: 'register', component:RegisterComponent},
             { path: 'login', component:LoginComponent},
+            { path: 'user', component:UserComponent},
             { path: 'home', component: HomeComponent },
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
