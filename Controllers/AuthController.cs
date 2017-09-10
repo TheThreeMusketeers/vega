@@ -8,6 +8,9 @@ using vega.Core.Models;
 using vega.Persistence;
 using System.IdentityModel.Tokens.Jwt;
 using vega.Core;
+using System.Security.Claims;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace vega.Controllers
 {
@@ -56,7 +59,15 @@ namespace vega.Controllers
 
         JwtPacket CreateJwtPacket(User user)
         {
-            var jwt = new JwtSecurityToken();
+            var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("this is the secret key"));
+
+            var signingCredentials = new SigningCredentials(signingKey,SecurityAlgorithms.HmacSha256);
+            
+            var claims = new Claim[]
+            {
+                new Claim(JwtRegisteredClaimNames.Sub,user.Id.ToString())
+            };
+            var jwt = new JwtSecurityToken(claims:claims,signingCredentials:signingCredentials);
             var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
             return new JwtPacket()
             {

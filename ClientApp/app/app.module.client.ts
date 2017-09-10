@@ -1,3 +1,4 @@
+import { UserService } from './services/user.service';
 import { AuthService } from './services/auth.service';
 import { ErrorHandler } from '@angular/core';
 import { ToastyModule } from 'ng2-toasty';
@@ -30,6 +31,7 @@ import { AppErrorHandler } from "./components/app/app.error-handler";
         PhotoService,
         ProgressService,
         AuthService,
+        UserService,
         {provide:ErrorHandler,useClass:AppErrorHandler},
         {provide:BrowserXhr,useClass:BrowserXhrWithProgress},
         { provide: 'ORIGIN_URL', useValue: location.origin }

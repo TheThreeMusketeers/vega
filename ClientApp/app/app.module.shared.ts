@@ -1,3 +1,4 @@
+import { UserService } from './services/user.service';
 import { LoginComponent } from './components/login/login.component';
 import { AuthService } from './services/auth.service';
 import { RegisterComponent } from './components/register/register.component';
@@ -62,6 +63,7 @@ export const sharedConfig: NgModule = {
         PhotoService,
         ProgressService,
         AuthService,
+        UserService,
         {provide:ErrorHandler,useClass:AppErrorHandler},
         {provide:BrowserXhr,useClass:BrowserXhrWithProgress}
     ]

@@ -9,5 +9,7 @@ namespace vega.Core
           void Add(User user);
 
           Task<User> Login(LoginViewModel loginData);
+
+          Task<User> GetUser(int id);
     }
 }

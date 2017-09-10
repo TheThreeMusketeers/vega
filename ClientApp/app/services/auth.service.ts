@@ -1,6 +1,6 @@
 import { tokenNotExpired } from 'angular2-jwt';
 import { Router } from '@angular/router';
-import { Http } from '@angular/http';
+import { Http,Headers,RequestOptions } from '@angular/http';
 import { Injectable, Inject } from '@angular/core';
 
 
@@ -18,10 +18,20 @@ export class AuthService {
          return localStorage.getItem(this.NAME_KEY);
      }
 
+     get token(){
+        return localStorage.getItem(this.TOKEN_KEY);
+     }
+
      get isAuthenticated(){
         //return false;
         return tokenNotExpired(this.TOKEN_KEY); 
         //return !!localStorage.getItem(this.TOKEN_KEY);
+     }
+
+     get tokenHeader(){
+         var header = new Headers({'Authorization':'Bearer ' + this.token});
+        
+         return new RequestOptions({headers:header});
      }
 
      register(user){

@@ -13,6 +13,9 @@ using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using vega.Core;
 using vega.Core.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace WebApplicationBasic
 {
@@ -67,6 +70,24 @@ namespace WebApplicationBasic
             }
 
             app.UseStaticFiles();
+
+            //app.UseCors("Cors");
+
+            var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("this is the secret key"));
+            
+            app.UseJwtBearerAuthentication(new JwtBearerOptions
+            {
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true,
+                TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = signingKey,
+                    ValidateLifetime = false,
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                }
+            });
 
             app.UseMvc(routes =>
             {

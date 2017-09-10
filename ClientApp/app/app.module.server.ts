@@ -1,3 +1,4 @@
+import { UserService } from './services/user.service';
 import { AuthService } from './services/auth.service';
 import { PhotoService } from './services/photo.service';
 import { AppErrorHandler } from './components/app/app.error-handler';
@@ -25,7 +26,8 @@ import { sharedConfig } from './app.module.shared';
         VehicleService,
         PhotoService,
         ProgressService,
-        AuthService
+        AuthService,
+        UserService
     ]
    
 })
