@@ -1,3 +1,4 @@
+import { ToastyService } from 'ng2-toasty';
 import { tokenNotExpired } from 'angular2-jwt';
 import { Router } from '@angular/router';
 import { Http,Headers,RequestOptions } from '@angular/http';
@@ -10,7 +11,10 @@ export class AuthService {
     NAME_KEY = 'name'
     TOKEN_KEY = 'token'
 
-    constructor(private http:Http,private router:Router, @Inject('ORIGIN_URL') originUrl: string) {
+    constructor(private http:Http,
+                private router:Router,
+                private toasty:ToastyService, 
+                @Inject('ORIGIN_URL') originUrl: string) {
         this.originUrl = originUrl;
      }
 
@@ -39,6 +43,15 @@ export class AuthService {
          return this.http.post(this.originUrl+'/auth/register',user)
             .subscribe(res => {
                 this.authenticate(res);
+            },
+            err=>{
+                this.toasty.error({
+                    title:'Error',
+                    msg: err.text(),
+                    theme:'bootstrap',
+                    showClose:true,
+                    timeout:5000
+                  });      
             });
      }
 

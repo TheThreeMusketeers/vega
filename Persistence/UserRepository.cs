@@ -24,6 +24,11 @@ namespace vega.Persistence
             return await context.Users.SingleOrDefaultAsync(u => u.Id == id);
         }
 
+        public async Task<User> GetUserByEmail(string email)
+        {
+            return await context.Users.SingleOrDefaultAsync(u => u.Email == email);
+        }
+
         public async Task<User> Login(LoginViewModel loginData)
         {
             return await context.Users.SingleOrDefaultAsync(u => u.Email == loginData.Email && u.Password == loginData.Password);

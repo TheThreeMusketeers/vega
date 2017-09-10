@@ -32,6 +32,10 @@ namespace vega.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
+            
+            var userSaved = await repository.GetUserByEmail(user.Email);
+            if(userSaved!=null)
+                return BadRequest("Email already exists");
 
             repository.Add(user);
 
