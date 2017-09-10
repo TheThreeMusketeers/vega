@@ -18,12 +18,12 @@
                     </a>
                 </li>
                 <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/vehicles/new']">
+                    <a [routerLink]="['/vehicles/new']" *ngIf="auth.isAuthenticated">
                         <span class='glyphicon glyphicon-plus'></span> New Vehicle
                     </a>
                 </li>
                 <li [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact:true}">
-                    <a [routerLink]="['/vehicles']">
+                    <a [routerLink]="['/vehicles']" *ngIf="auth.isAuthenticated">
                         <span class='glyphicon glyphicon-home'></span> Vehicles
                     </a>
                 </li>

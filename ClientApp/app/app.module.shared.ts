@@ -47,7 +47,7 @@ export const sharedConfig: NgModule = {
         ChartModule,
         ToastyModule.forRoot(),
         RouterModule.forRoot([
-            { path: '', redirectTo: 'vehicles', pathMatch: 'full' },
+            { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'vehicles/new', component:VehicleFormComponent},
             { path: 'vehicles/edit/:id',component:VehicleFormComponent},
             { path: 'vehicles/:id', component:ViewVehicleComponent},
